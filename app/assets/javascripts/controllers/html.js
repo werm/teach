@@ -1,8 +1,16 @@
 'use strict';
 
 angular.module('ngApp')
-  .controller('HtmlCtrl', function ($scope, htmlService) {
-     $scope.aceLoaded = function(_editor){
+  .controller('HtmlCtrl', function ($scope, restService) {
+    restService.getElements().then(function(elements){
+      $scope.elements = elements;
+    });
+  });
+
+  angular.module('ngApp')
+    .controller('ShowHtmlCtrl', function ($scope, restService, $routeParams) {
+      console.log($routeParams)
+      $scope.aceLoaded = function(_editor){
        // Editor part
        console.log(_editor)
        var _session = _editor.getSession();
@@ -20,32 +28,32 @@ angular.module('ngApp')
          $('.preview').html(_editor.session.getValue());
        });
      };
-    htmlService.getElements().then(function(elements){
-      $scope.elements = elements;
+    restService.getElement().then(function(element){
+      $scope.element = element;
     });
   });
 
-  // angular.module('editorApp')
-  //   .controller('MainCtrl', function ($scope) {
-  //     $scope.aceLoaded = function(_editor){
-  //       // Editor part
-  //       var _session = _editor.getSession();
-  //       var _renderer = _editor.renderer;
+  angular.module('ngApp')
+    .controller('NewHtmlCtrl', function ($scope, $http) {
+    $scope.formData = {};
+    $scope.processForm = function() {
+    $http({
+        method  : 'POST',
+        url   : '/elements',
+        data  : $.param($scope.formData),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+      })
+        .success(function(data) {
+          console.log(data);
 
-  //       // Options
-  //       _session.setUndoManager(new ace.UndoManager());
-
-  //       // Events
-  //       _editor.on("changeSession", function(){ 
-  //         console.log("changeSession")
-  //       });
-  //       _session.on("change", function(){
-  //         $('#preview').html(_editor.session.getValue());
-  //       });
-  //     };
-  //     $scope.awesomeThings = [
-  //       'HTML5 Boilerplate',
-  //       'AngularJS',
-  //       'Karma'
-  //     ];
-  //   });
+          if (!data.success) {
+          // if not successful, bind errors to error variables
+            $scope.errorName = data.errors.name;
+            $scope.errorSuperhero = data.errors.superheroAlias;
+          } else {
+          // if successful, bind success message to message
+            $scope.message = data.message;
+          }
+        });
+    };
+  });

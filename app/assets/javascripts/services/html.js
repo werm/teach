@@ -1,15 +1,20 @@
 'use strict';
 
 angular.module('ngApp')
-  .factory('htmlService', function($http) {
+  .factory('restService', function($http, $routeParams) {
    return {
     getElements: function() {
-       //return the promise directly.
+      console.log($routeParams)
        return $http.get('/elements')
              .then(function(result) {
-              //resolve the promise as the data
               return result.data;
             });
+    },
+    getElement: function(){
+      return $http.get('/elements/' + $routeParams.id)
+       .then(function(result) {
+        return result.data;
+      });
     }
    }
 });

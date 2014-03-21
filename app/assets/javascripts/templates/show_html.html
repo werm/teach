@@ -1,13 +1,11 @@
 <h1>HTML</h1>
 
-<div ng-repeat="element in elements">
   <div class="row">
     <div class="col-md-6 col-lg-6">
-      <h4><a ng-href="#/html/{{ element.id }}">{{ element.name }}</a></h4>
+      <h4>{{ element.name }}</h4>
       <p class="description">
         {{ element.description }}
       </p>
-      <!-- <a ng-href="#/html/{{ element.id }}"><img ng-src="/assets/doitlive.jpg"></a> -->
     </div><!-- .col -->
 
     <div class="col-md-6 col-lg-6">
@@ -31,5 +29,18 @@
 
     </div><!-- col -->
   </div><!-- .row -->
-<hr>
-</div><!-- ng-repeat -->
+
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+      <div ui-ace="{
+            useWrapMode : true,
+            theme:'github',
+            mode: 'html',
+            onLoad: aceLoaded,
+            onChange: aceChanged
+          }"></div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <div class="preview"></div>
+    </div><!-- col -->
+  </div><!-- row -->

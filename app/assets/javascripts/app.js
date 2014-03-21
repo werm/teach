@@ -16,6 +16,14 @@ angular.module('ngApp', [
         templateUrl: 'assets/templates/html.html',
         controller: 'HtmlCtrl'
       })
+      .when('/html/new', {
+        templateUrl: 'assets/templates/new_html.html',
+        controller: 'NewHtmlCtrl'
+      })
+      .when('/html/:id', {
+        templateUrl: 'assets/templates/show_html.html',
+        controller: 'ShowHtmlCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

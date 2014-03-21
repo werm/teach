@@ -1,0 +1,28 @@
+  <div id="messages" ng-show="message">{{ message }}</div>
+
+  <!-- FORM -->
+  <form>
+    <!-- NAME -->
+    <div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" >
+      <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+    </div>
+
+    <div id="example-group" class="form-group" ng-class="{ 'has-error' : errorExample }">
+      <label>Example Code</label>
+      <input type="text" name="example" class="form-control" placeholder="<div>Stuff here.</div>">
+      <span class="help-block" ng-show="errorExample">{{ errorExample }}</span>
+    </div>
+
+    <div id="description-group" class="form-group" ng-class="{ 'has-error' : errorDescription }">
+      <label>Description</label>
+      <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+      
+      <span class="help-block" ng-show="errorDescription">{{ errorDescription }}</span>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg btn-block">
+      <span class="glyphicon glyphicon-flash"></span> Submit!
+    </button>
+  </form>
