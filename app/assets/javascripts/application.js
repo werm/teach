@@ -13,12 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require ace
+//= require ace/ace
 //= require angular
 //= require angular-resource
 //= require angular-route
 //= require angular-sanitize
+//= require ui-ace.min
 //= require app
 //= require_tree ./services
 //= require_tree ./controllers
-//= require ui-ace.min

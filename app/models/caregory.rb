@@ -1,4 +1,4 @@
 class Caregory < ActiveRecord::Base
 
-  has_many :elements
+  # has_many :elements
 end
